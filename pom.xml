@@ -10,7 +10,7 @@
 
     <properties>
         <serenity.version>1.2.2</serenity.version>
-        <proxy.turnedOn>false</proxy.turnedOn>
+        <proxy.turnedOn>true</proxy.turnedOn>
     </properties>
 
     <dependencies>
@@ -36,6 +36,17 @@
             <version>3.0.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.lightbody.bmp</groupId>
+            <artifactId>browsermob-core</artifactId>
+            <version>2.1.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.5</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -44,6 +55,19 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <proxy.turnedOn>${proxy.turnedOn}</proxy.turnedOn>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

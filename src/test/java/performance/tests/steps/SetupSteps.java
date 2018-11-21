@@ -27,12 +27,15 @@ public class SetupSteps  extends ScenarioSteps {
         }
     }
 
-    @Step
+    @Step("Open front page")
     public void openFrontPage() {
+        String frontPageUrl = property.getProperty("front.page");
+        getDriver().navigate().to(frontPageUrl);
+    }
+
+    @Step("Init driver")
+    public void initDriver() {
         WebDriver driver = getDriver();
         driver.manage().window().maximize();
-        String frontPageUrl = property.getProperty("front.page");
-
-        driver.navigate().to(frontPageUrl);
     }
 }

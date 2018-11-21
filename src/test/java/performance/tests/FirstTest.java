@@ -1,22 +1,43 @@
 package performance.tests;
 
+import net.lightbody.bmp.BrowserMobProxy;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import performance.utils.proxyutils.ProxyUtils;
 
 /**
  * Created by andriy.chornyak on 11/20/2018.
  */
 
 public class FirstTest extends BaseTest {
+    private BrowserMobProxy proxy;
+
+    @Before
+    public void startProxy() {
+        test.initDriver();
+        test.openFrontPage();
+        proxy = ProxyUtils.getProxy();
+    }
+
+    @After
+    public void stopProxy() {
+        proxy.stop();
+    }
 
     @Test
     @Title("Performance. Front fage of DOU - Test")
-    @WithTags({
-            @WithTag("Tasks")
-    })
     public void frontPageTest() {
+        String methodName = new Object() {}
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        String strFilePath = "target/" + methodName + ".har";
+
+        proxy.newHar(methodName);
         test.openFrontPage();
+
+        ProxyUtils.pushToHarStorage(strFilePath, proxy.getHar());
     }
 }
