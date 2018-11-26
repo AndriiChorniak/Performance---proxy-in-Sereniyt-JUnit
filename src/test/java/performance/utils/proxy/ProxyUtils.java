@@ -1,4 +1,4 @@
-package performance.utils.proxyutils;
+package performance.utils.proxy;
 
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
@@ -13,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.Assert;
 import org.openqa.selenium.Proxy;
+import performance.utils.property.PropertyUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -61,6 +62,7 @@ public class ProxyUtils {
 
     public static void pushToHarStorage(String filePath, Har har) {
         FileOutputStream fos = null;
+        String mongoHost = PropertyUtils.ENDPOINT_PROPERTY.getProperty("harStorage.address");
         try {
             fos = new FileOutputStream(filePath);
             har.writeTo(fos);
@@ -71,7 +73,6 @@ public class ProxyUtils {
         }
 
         try {
-            String mongoHost = "http://52.17.179.195:5000";
             //Post to mongo server which stores Har file
             CloseableHttpClient client = HttpClients.createDefault();
             HttpPost post = new HttpPost(mongoHost + "/results/upload");

@@ -5,7 +5,7 @@ import net.thucydides.core.annotations.Title;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import performance.utils.proxyutils.ProxyUtils;
+import performance.utils.proxy.ProxyUtils;
 
 /**
  * Created by andriy.chornyak on 11/20/2018.
@@ -17,7 +17,6 @@ public class FirstTest extends BaseTest {
     @Before
     public void startProxy() {
         test.initDriver();
-        test.openFrontPage();
         proxy = ProxyUtils.getProxy();
     }
 

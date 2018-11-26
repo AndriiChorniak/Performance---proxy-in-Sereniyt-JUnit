@@ -5,7 +5,7 @@ import net.thucydides.core.fixtureservices.FixtureService;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import performance.utils.proxyutils.ProxyUtils;
+import performance.utils.proxy.ProxyUtils;
 
 /**
  * Created by andriy.chornyak on 11/20/2018.
